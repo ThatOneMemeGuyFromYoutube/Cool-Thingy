@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Full Body Mesh Visualization</title>
+    <title>Real-Time Body Skeleton</title>
     <style>
-        body { margin: 0; overflow: hidden; background-color: #f0f0f0; }
-        #canvas { position: absolute; top: 0; left: 0; border: 1px solid #ccc; }
-        .container { position: relative; width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        body { margin: 0; overflow: hidden; }
+        #video { display: none; }
+        #canvas { position: absolute; top: 0; left: 0; }
+        .container { position: relative; width: 100vw; height: 100vh; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Full Body Mesh Visualization</h1>
-        <button id="startButton">Start Camera</button>
-        <button id="stopButton">Stop Camera</button>
         <video id="video"></video>
         <canvas id="canvas"></canvas>
     </div>
@@ -83,7 +81,7 @@
             await setupCamera();
             
             canvasElement.width = videoElement.videoWidth;
-            canvasElement.videoHeight;
+            canvasElement.height = videoElement.videoHeight;
 
             holistic = new Holistic({
                 locateFile: (file) => {
@@ -110,18 +108,8 @@
                 width: 1280,
                 height: 720
             });
-        }
-
-        const startButton = document.getElementById('startButton');
-        const stopButton = document.getElementById('stopButton');
-
-        startButton.addEventListener('click', () => {
             camera.start();
-        });
-
-        stopButton.addEventListener('click', () => {
-            camera.stop();
-        });
+        }
 
         init().catch(console.error);
     </script>
